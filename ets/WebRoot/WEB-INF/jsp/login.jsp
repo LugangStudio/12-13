@@ -36,7 +36,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				data:JSON.stringify(obj),
 				dataType: 'json',
 				success:function(data){
-				if(data=="账号或密码不正确！"){alert(data)}
+				if(data=="账号或密码不正确！"){
+				$('#username').val("");
+				$('#username').attr('placeholder',data);
+				}
 				else{
 				$('#loginform').submit();
 				}

@@ -72,7 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		success:function(data){
 		
 		if(data=="用户名已被注册！！"){
-		alert(data);
+		$('#username').val("");
+		$('#username').attr('placeholder',data);
 		onlyname="flase";
 		}else{onlyname="true"}
 		

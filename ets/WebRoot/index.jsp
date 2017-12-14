@@ -24,7 +24,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	JSON.parse()
 	*/
 	$('#b1').click(function(){
-		var t1=$('#t1').val();
+		var t1=$('#t1').attr('placeholder');
+		$('#t1').attr('placeholder','sadasf');
 	alert(t1)
 		
 		var obj={"t1":t1}
@@ -46,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
    	<form >
-   	text1:<input type="text" id="t1" name="t1"/>
+   	text1:<input type="text" id="t1" name="t1" placeholder="sad"/>
 	<input type="button" id="b1" value="测试json"/>
    	</form>
   </body>
