@@ -198,4 +198,7 @@
       answer = #{answer,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
+	<select id="getall" resultType="User">
+		select * from tb_user
+	</select>
 </mapper>

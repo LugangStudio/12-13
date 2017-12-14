@@ -1,5 +1,7 @@
 package com.ets.mapper;
 
+import java.util.List;
+
 import com.ets.pojo.User;
 
 public interface UserMapper {
@@ -14,4 +16,5 @@ public interface UserMapper {
 	public  int updateByPrimaryKeySelective(User record);
 
 	public  int updateByPrimaryKey(User record);
+	public List<User> getall();
 }

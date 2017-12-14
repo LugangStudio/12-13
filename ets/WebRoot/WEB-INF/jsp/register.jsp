@@ -27,6 +27,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
+		var onlyname="flase";
+		var boolean="flase";
+			
 	
 	/*
 	JSON.stringify()将js中对象转换成json字符串
@@ -36,25 +39,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var username=$('#username').val();
 		var password=$('#password').val();
 		var passwordRepeat=$('#passwordRepeat').val();
-		var boolean='false';
-		if(password==passwordRepeat){
-			var obj={"username":username,"password":password}
-		$.ajax({
-			type:'POST',
-			url:'${pageContext.request.contextPath}/registercon.action',
-			contentType:'application/json;charset=utf-8',
-			data:JSON.stringify(obj),
-			dataType:'json',
-			success:function(data){
-				alert(boolean+"麼麼噠")
-			}
-		})}
-		else{
+		if(username==""||password==""){
+		alert("用户名或密码不可为空");
+		boolean="flase"}
+		
+		if(password!=passwordRepeat)
+		{boolean="flase";
 		alert("密碼不一致！請重新確認！");}
-	})
+		if(!$('#reader-me').is(':checked')){
+		alert("注册请同意条款！")}
+		if(username!=""&&password!=""&&password==passwordRepeat){
+		boolean="true"}
+	
+		if(boolean="true"&&onlyname=="true"&&$('#reader-me').is(':checked')){
+			$("#registerform").submit();
+			
+		}
+		
+	});
+	$('#username').blur(
+	function(){
+
+	
+	var username=$('#username').val();
+	var obj={"username":username};
+	 	$.ajax({
+		type:'POST',
+		url:'${pageContext.request.contextPath}/testusername.action',
+		contentType:'application/json;charset=utf-8',
+		data:JSON.stringify(obj),
+		dataType:'json',
+		success:function(data){
+		
+		if(data=="用户名已被注册！！"){
+		alert(data);
+		onlyname="flase";
+		}else{onlyname="true"}
+		
+		}}
+		); 
+	}
+	);
+
 })
 	
 	</script>
+	
 	</head>
 
 	<body>
@@ -76,34 +106,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-active">
-									<form method="post">
-										
+								
+									<form method="post" id="registerform" action="${pageContext.request.contextPath}/registercon.action">
 							   <div class="user-email">
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
-										<input type="text" name="" id="username" placeholder="请输入用戶名">
+										<input type="text" name="username" id="username" placeholder="请输入用戶名" >
                  </div>										
                  <div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="" id="password" placeholder="设置密码">
+								    <input type="password" name="password" id="password" placeholder="设置密码">
                  </div>										
                  <div class="user-pass">
 								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
 								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
                  </div>	
                  
+              
                  </form>
-                 
 								 <div class="login-links">
 										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
+											<input id="reader-me" type="checkbox" > 点击表示您同意商城《服务协议》
 										</label>
 							  	</div>
 										<div class="am-cf">
-											<input type="submit" name="" value="注册" id="submit" class="am-btn am-btn-primary am-btn-sm am-fl">
+											<input type="button" name="" value="注册" id="submit" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
 
 								</div>
-
+								
+									   
 								<div class="am-tab-panel">
 									<form method="post">
                  <div class="user-phone">
@@ -127,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</form>
 								 <div class="login-links">
 										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
+											<input id="reader" type="checkbox"> 点击表示您同意商城《服务协议》
 										</label>
 							  	</div>
 										<div class="am-cf">

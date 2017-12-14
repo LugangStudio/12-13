@@ -1,5 +1,7 @@
 package com.ets.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,12 @@ public class UserMapperServiceImpl implements IUserMapperService {
 	public int updateByPrimaryKey(User record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<User> getall() {
+		// TODO Auto-generated method stub
+		return userMapper.getall();
 	}
 
 }

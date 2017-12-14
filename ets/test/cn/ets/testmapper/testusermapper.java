@@ -1,5 +1,7 @@
 package cn.ets.testmapper;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.*;
 import org.springframework.context.ApplicationContext;
@@ -38,5 +40,14 @@ public	void init(){
 		public void c(){
 			Date date=new Date();
 			System.out.println(date);
+		}
+		@Test
+		public void testgetall(){
+			UserMapper up=(UserMapper)ApplicationContext.getBean("userMapper");
+		List<User> users=up.getall();
+		for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+			User user = (User) iterator.next();
+			System.out.println(user.getUsername());
+		}
 		}
 }

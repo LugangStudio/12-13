@@ -1,6 +1,7 @@
 package com.ets.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,12 +31,17 @@ public class registerController {
 		 * @return
 		 */
 		@RequestMapping("/registercon")
-		@ResponseBody
-		public String registercon(HttpServletRequest request,HttpServletResponse response,@RequestBody User user){
-			User users=user;
+
+		public String registercon(HttpServletRequest request,HttpServletResponse response,String username,String password){
+			System.out.println("*****************************");
+			System.out.println(username+"成功注册！");
+			System.out.println("*****************************");
+			User user=new User();
 			Date date=new Date();
-			users.setCreatedtime(date);
-			users.setUpdatedtime(date);
+			user.setUsername(username);
+			user.setPassword(password);
+			user.setCreatedtime(date);
+			user.setUpdatedtime(date);
 		int i=	iuservices.insertSelective(user);
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("login");
@@ -47,5 +53,19 @@ public class registerController {
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("login");
 			return mv;
+		}
+		@RequestMapping("/testusername")
+		@ResponseBody
+		public String testusername(HttpServletRequest request,HttpServletResponse response,@RequestBody User user){
+			String result="用户名未被注册！！！";
+			System.out.println("传过来的username:"+user.getUsername());
+			List<User> users=iuservices.getall();
+			for (User user2 : users) {
+				if(user.getUsername().equals(user2.getUsername()))result="用户名已被注册！！";
+			}
+			System.out.println("****************************");
+			System.out.println(result);
+			System.out.println("****************************");
+			return result;
 		}
 }

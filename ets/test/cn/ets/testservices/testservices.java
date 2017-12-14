@@ -1,5 +1,8 @@
 package cn.ets.testservices;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,5 +22,17 @@ public class testservices {
 		IUserMapperService iu=(IUserMapperService)context.getBean("userService");
 		User u=iu.selectByPrimaryKey(1l);
 		System.out.println(u.getUsername());
+	}
+	@Test
+	public void testgetall(){
+		IUserMapperService iu=(IUserMapperService)context.getBean("userService");
+		List<User> users=iu.getall();
+		/*for (Iterator iterator = users.iterator(); iterator.hasNext();) {
+			User user = (User) iterator.next();
+			System.out.println(user.getUsername());
+		}*/
+		for (User user : users) {
+			System.out.println(user.getUsername());
+		}
 	}
 }
