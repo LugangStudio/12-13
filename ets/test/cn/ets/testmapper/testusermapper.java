@@ -37,10 +37,20 @@ public	void init(){
 		up.insertSelective(user);
 	}
 		@Test
-		public void c(){
-			Date date=new Date();
-			System.out.println(date);
+		public void cccc(){
+			UserMapper up=(UserMapper)ApplicationContext.getBean("userMapper");
+			User u=new User();
+			u.setUsername("aaa");
+			u.setRealname("1234");
+			up.updateByUsernameSelective(u);
 		}
+		
+		@Test
+		public void d(){
+			UserMapper up=(UserMapper)ApplicationContext.getBean("userMapper");
+			up.deleteByPrimaryKey(1l);
+		}
+		
 		@Test
 		public void testgetall(){
 			UserMapper up=(UserMapper)ApplicationContext.getBean("userMapper");

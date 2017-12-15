@@ -16,5 +16,8 @@ public interface UserMapper {
 	public  int updateByPrimaryKeySelective(User record);
 
 	public  int updateByPrimaryKey(User record);
+	
 	public List<User> getall();
+	
+	public int updateByUsernameSelective(User record);
 }

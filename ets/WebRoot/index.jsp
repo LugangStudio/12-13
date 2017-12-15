@@ -48,7 +48,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
    	<form >
    	text1:<input type="text" id="t1" name="t1" placeholder="sad"/>
-	<input type="button" id="b1" value="测试json"/>
+	<input type="button" id="b1" value="jsonss"/>
    	</form>
+   	<hr>
+
   </body>
 </html>

@@ -16,5 +16,8 @@ public interface IUserMapperService {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+   
     List<User> getall();
+    
+	public int updateByUsernameSelective(User record);
 }

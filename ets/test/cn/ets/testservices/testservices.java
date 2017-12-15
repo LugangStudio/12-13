@@ -35,4 +35,20 @@ public class testservices {
 			System.out.println(user.getUsername());
 		}
 	}
+	
+	@Test
+	public void test1(){
+		int user_id=0;
+		IUserMapperService services=(IUserMapperService)context.getBean("userService");
+		List<User> users=services.getall();
+		for (User user : users) {
+			if(user.getUsername().equals("aaa")){
+			System.out.println(user.getUserId());}
+		}
+	}
+	
+	public void testupdatebyusernameselective(){
+		User user=new User();
+		user.setUsername("aaa");
+	}
 }

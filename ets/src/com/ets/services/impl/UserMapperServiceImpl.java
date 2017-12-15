@@ -56,4 +56,10 @@ public class UserMapperServiceImpl implements IUserMapperService {
 		return userMapper.getall();
 	}
 
+	@Override
+	public int updateByUsernameSelective(User record) {
+		// TODO Auto-generated method stub
+		return userMapper.updateByUsernameSelective(record);
+	}
+
 }
