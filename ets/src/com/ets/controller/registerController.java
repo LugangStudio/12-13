@@ -57,6 +57,7 @@ public class registerController {
 		@RequestMapping("/testusername")
 		@ResponseBody
 		public String testusername(HttpServletRequest request,HttpServletResponse response,@RequestBody User user){
+			
 			String result="用户名未被注册！！！";
 			System.out.println("传过来的username:"+user.getUsername());
 			List<User> users=iuservices.getall();

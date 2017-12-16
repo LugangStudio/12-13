@@ -245,4 +245,7 @@
     </set>
     where username = #{username,jdbcType=BIGINT}
   </update>
+  <select id="getid" parameterType="String" resultType="long">
+  select user_id from tb_user where username=#{value}
+  </select>
 </mapper>

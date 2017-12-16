@@ -20,4 +20,6 @@ public interface UserMapper {
 	public List<User> getall();
 	
 	public int updateByUsernameSelective(User record);
+	
+	public long getid(String username);
 }

@@ -29,7 +29,7 @@ public class personindexcontroller {
 	}
 	
 	/**
-	 * 跳转到infomation.jsp传username
+	 * 跳转到infomation.jsp传username,id
 	 * @param request
 	 * @param response
 	 * @param username
@@ -37,14 +37,10 @@ public class personindexcontroller {
 	 */
 	@RequestMapping("/hreftoinformation")
 	public ModelAndView hreftoinformation(HttpServletRequest request,HttpServletResponse response,String username){
-		/*int user_id=0;
-		List<User> users=services.getall();
-		for (User user : users) {
-			if(user.getUsername().equals(username)){user_id=Integer.valueOf(user.getUserId().toString()); }
-		}
-		mv.addObject("user_id",user_id);*/
-		ModelAndView mv=new ModelAndView();	
-		mv.addObject(username,username);
+		String id=String.valueOf(services.getid(username));
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("id", id);
+		mv.addObject("username",username);
 		mv.setViewName("information");
 		return mv;
 	}

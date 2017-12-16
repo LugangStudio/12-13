@@ -41,7 +41,7 @@ public class UserMapperServiceImpl implements IUserMapperService {
 	@Override
 	public int updateByPrimaryKeySelective(User record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
@@ -60,6 +60,12 @@ public class UserMapperServiceImpl implements IUserMapperService {
 	public int updateByUsernameSelective(User record) {
 		// TODO Auto-generated method stub
 		return userMapper.updateByUsernameSelective(record);
+	}
+
+	@Override
+	public long getid(String username) {
+		// TODO Auto-generated method stub
+		return userMapper.getid(username);
 	}
 
 }

@@ -39,10 +39,7 @@ public	void init(){
 		@Test
 		public void cccc(){
 			UserMapper up=(UserMapper)ApplicationContext.getBean("userMapper");
-			User u=new User();
-			u.setUsername("aaa");
-			u.setRealname("1234");
-			up.updateByUsernameSelective(u);
+			System.out.println(up.getid("aaa"));
 		}
 		
 		@Test
