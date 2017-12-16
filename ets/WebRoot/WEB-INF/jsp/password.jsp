@@ -6,16 +6,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
-		<title>安全设置</title>
+		<title>修改密码</title>
 
 		<link href="AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 		<link href="AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 
 		<link href="css/personal.css" rel="stylesheet" type="text/css">
-		<link href="css/infstyle.css" rel="stylesheet" type="text/css">
+		<link href="css/stepstyle.css" rel="stylesheet" type="text/css">
+
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script src="AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
+		<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript">
+				$(function(){
+				var truepass="flase";
+				var repeatpass="flase";
+				
+				
+				$('#password').blur(
+				function(){
+					var password=$('#password').val();
+					var user_id=${param.user_id};
+					var obj={"password":password,"userId":user_id};
+					$.ajax(
+				{
+					type:'POST',
+					url:'${pageContext.request.contextPath}/testpassword.action',
+					contentType:'appliaction/json;charset=utf-8',
+					data:JSON.stringify(obj),
+					dataType:'json',
+					success:function(data){
+					if(data=="密码不正确，请重新输入！！！"){
+					$('#password').val("");
+					$('#password').attr('placeholder',data);
+					}else{truepass="true"}
+					}
+					}
+					)
+				
+				}
+				)
+				
+				$('#repeatpassword').blur(function(){
+				var newpassword=$('#newpassword').val();
+				var repeatpassword=$('#repeatpassword').val();
+				if(repeatpassword!=newpassword){
+			 	$('#repeatpassword').val("");
+				$('#repeatpassword').attr('placeholder',"两次密码不一致，请重新输入");
+				}else{repeatpass="true";}
+				});
+				
+				
+				$('#save').click(
+				function(){
+				if(truepass=="true"&&repeatpass=="true"){
+				var user_id=${param.user_id};
+				var newpassword=$('#newpassword').val();
+				var obj={"userId":user_id,"password":newpassword};
+				$.ajax(
+				{
+					type:'POST',
+					url:'${pageContext.request.contextPath}/updatepassword.action',
+					contentType:'appliaction/json;charset=utf-8',
+					data:JSON.stringify(obj),
+					dataType:'json',
+					success:function(data){
+					alert(data);
+					}	
+				}
+				)
+				
+				}else{
+				alert("请先将表单正确填写完整！！！");
+				}
+				
+				}
+				
+				)
+				
+				})
+		
+		
+		</script>
 	</head>
 
 	<body>
@@ -90,109 +166,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="col-main">
 				<div class="main-wrap">
 
-					<!--标题 -->
-					<div class="user-safety">
-						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">账户安全</strong> / <small>Set&nbsp;up&nbsp;Safety</small></div>
-						</div>
-						<hr/>
-
-						<!--头像 -->
-						<div class="user-infoPic">
-
-							<div class="filePic">
-								<img class="am-circle am-img-thumbnail" src="images/getAvatar.do.jpg" alt="" />
-							</div>
-
-							<p class="am-form-help">头像</p>
-
-							<div class="info-m">
-								<div><b>用户名：<i>${param.username}</i></b></div>
-                                <div class="safeText">
-                                  	<a href="safety.html">账户安全:<em style="margin-left:20px ;">60</em>分</a>
-									<div class="progressBar"><span style="left: -95px;" class="progress"></span></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="check">
-							<ul>
-								<li>
-									<i class="i-safety-lock"></i>
-									<div class="m-left">
-										<div class="fore1">登录密码</div>
-										<div class="fore2"><small>为保证您购物安全，建议您定期更改密码以保护账户安全。</small></div>
-									</div>
-									<div class="fore3">
-										<a href="password.action?user_id=${param.user_id }">
-											<div class="am-btn am-btn-secondary">修改</div>
-										</a>
-									</div>
-								</li>
-								<li>
-									<i class="i-safety-wallet"></i>
-									<div class="m-left">
-										<div class="fore1">支付密码</div>
-										<div class="fore2"><small>启用支付密码功能，为您资产账户安全加把锁。</small></div>
-									</div>
-									<div class="fore3">
-										<a href="setpay.html">
-											<div class="am-btn am-btn-secondary">立即启用</div>
-										</a>
-									</div>
-								</li>
-								<li>
-									<i class="i-safety-iphone"></i>
-									<div class="m-left">
-										<div class="fore1">手机验证</div>
-										<div class="fore2"><small>您验证的手机：186XXXXXXXX 若已丢失或停用，请立即更换</small></div>
-									</div>
-									<div class="fore3">
-										<a href="bindphone.html">
-											<div class="am-btn am-btn-secondary">换绑</div>
-										</a>
-									</div>
-								</li>
-								<li>
-									<i class="i-safety-mail"></i>
-									<div class="m-left">
-										<div class="fore1">邮箱验证</div>
-										<div class="fore2"><small>您验证的邮箱：5831XXX@qq.com 可用于快速找回登录密码</small></div>
-									</div>
-									<div class="fore3">
-										<a href="email.html">
-											<div class="am-btn am-btn-secondary">换绑</div>
-										</a>
-									</div>
-								</li>
-								<li>
-									<i class="i-safety-idcard"></i>
-									<div class="m-left">
-										<div class="fore1">实名认证</div>
-										<div class="fore2"><small>用于提升账号的安全性和信任级别，认证后不能修改认证信息。</small></div>
-									</div>
-									<div class="fore3">
-										<a href="idcard.html">
-											<div class="am-btn am-btn-secondary">认证</div>
-										</a>
-									</div>
-								</li>
-								<li>
-									<i class="i-safety-security"></i>
-									<div class="m-left">
-										<div class="fore1">安全问题</div>
-										<div class="fore2"><small>保护账户安全，验证您身份的工具之一。</small></div>
-									</div>
-									<div class="fore3">
-										<a href="question.html">
-											<div class="am-btn am-btn-secondary">认证</div>
-										</a>
-									</div>
-								</li>
-							</ul>
-						</div>
-
+					<div class="am-cf am-padding">
+						<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">修改密码</strong> / <small>Password</small></div>
 					</div>
+					<hr/>
+					<!--进度条-->
+					<div class="m-progress">
+						<div class="m-progress-list">
+							<span class="step-1 step">
+                                <em class="u-progress-stage-bg"></em>
+                                <i class="u-stage-icon-inner">1<em class="bg"></em></i>
+                                <p class="stage-name">重置密码</p>
+                            </span>
+							<span class="step-2 step">
+                                <em class="u-progress-stage-bg"></em>
+                                <i class="u-stage-icon-inner">2<em class="bg"></em></i>
+                                <p class="stage-name">完成</p>
+                            </span>
+							<span class="u-progress-placeholder"></span>
+						</div>
+						<div class="u-progress-bar total-steps-2">
+							<div class="u-progress-bar-inner"></div>
+						</div>
+					</div>
+					<form class="am-form am-form-horizontal">
+						<div class="am-form-group">
+							<label for="user-old-password" class="am-form-label">原密码</label>
+							<div class="am-form-content">
+								<input type="password" id="password" placeholder="请输入原登录密码">
+							</div>
+						</div>
+						<div class="am-form-group">
+							<label for="user-new-password" class="am-form-label">新密码</label>
+							<div class="am-form-content">
+								<input type="password" id="newpassword" placeholder="由数字、字母组合">
+							</div>
+						</div>
+						<div class="am-form-group">
+							<label for="user-confirm-password" class="am-form-label">确认密码</label>
+							<div class="am-form-content">
+								<input type="password" id="repeatpassword" placeholder="请再次输入上面的密码">
+							</div>
+						</div>
+						<div class="info-btn">
+							<div class="am-btn am-btn-danger" id="save">保存修改</div>
+						</div>
+
+					</form>
+
 				</div>
 				<!--底部-->
 				<div class="footer">

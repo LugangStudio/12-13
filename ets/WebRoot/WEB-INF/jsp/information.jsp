@@ -305,7 +305,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p><i class="am-icon-newspaper-o"></i>个人资料</p>
 						<ul>
 							<li> <a href="hreftoinformation.action?username=${username}">个人信息</a></li>
-							<li> <a href="safety.action?user_id=${id }">安全设置</a></li>
+							<li> <a href="safety.action?user_id=${id }&username=${username}">安全设置</a></li>
 							<li> <a href="address.html">地址管理</a></li>
 							<li> <a href="cardlist.html">快捷支付</a></li>
 						</ul>
