@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<div class="fore2"><small>保护账户安全，验证您身份的工具之一。</small></div>
 									</div>
 									<div class="fore3">
-										<a href="question.html">
+										<a href="question.action?user_id=${param.user_id}&username=${param.username}">
 											<div class="am-btn am-btn-secondary">认证</div>
 										</a>
 									</div>

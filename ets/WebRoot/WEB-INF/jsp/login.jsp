@@ -42,15 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 				else{
 				$('#loginform').submit();
-				}
-				
-				}
-				
-			}
-			)
-			})
-			})
-			
+				}}})})})
 		</script>
 	</head>
 
