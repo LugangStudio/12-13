@@ -2,24 +2,26 @@ package cn.ets.testservices;
 
 import java.lang.reflect.Array;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ets.pojo.Item;
+import com.ets.pojo.User;
+import com.ets.services.IItemmapperService;
+import com.ets.services.IUserMapperService;
 
 public class test {
-	int arr[]={1,0,0,0,0};
-void add(int i){
-	for(int i1=arr.length-1;i1>0;i1--){
-		if(arr[i1]!=0)arr[i1]=i;
+	private ApplicationContext context=null;
+	@Before
+	public void init(){
+		context=new ClassPathXmlApplicationContext("spring/spring_bean.xml");
 	}
-}
-public static void main(String[] args) {
-	test t=new test();
-	t.add(2);
-	for(int i=0;i<t.arr.length;i++){
-		System.out.println(t.arr[i]);
-	
-	
-	
+	@Test
+	public void testservices(){
+		IItemmapperService iu=(IItemmapperService)context.getBean("itemService");
+		Item u=iu.selectByPrimaryKey(1l);
+		System.out.println(u.getSellPoint());
 	}
-
-}
 }
