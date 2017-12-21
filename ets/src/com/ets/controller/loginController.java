@@ -39,13 +39,18 @@ public class loginController {
 			return result;
 		}
 
-	@RequestMapping("/denglu")
-	public ModelAndView denglu(HttpServletRequest request,HttpServletResponse response,String username){
+	@RequestMapping("/tohome2")
+	public ModelAndView tohome2(HttpServletRequest request,HttpServletResponse response,String username){
 		System.out.println("****************************");
 		System.out.println(username+"³É¹¦µÇÂ¼£¡");
 		System.out.println("****************************");
+		List<User> users=services.getall();
+		User user2=new User();
+		for (User user : users) {
+			if(user.getUsername().equals(username)){user2=user;}
+		}
 		ModelAndView mv=new ModelAndView();
-		mv.addObject("username", username);
+		mv.addObject("user", user2);
 		mv.setViewName("home2");
 		return mv;
 }

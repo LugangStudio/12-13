@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clear"></div>
 						
 						<div class="login-form">
-						  <form id="loginform" action="denglu.action">
+						  <form id="loginform" action="tohome2.action">
 							   <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
 								    <input type="text" name="username" id="username" placeholder="邮箱/手机/用户名">

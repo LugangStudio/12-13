@@ -59,6 +59,24 @@ public class payController {
 		return "success insert";
 	}
 	
-	
-
+	@RequestMapping("/selectid")
+	@ResponseBody
+	public Shipping selectid(HttpServletRequest request,HttpServletResponse response,@RequestBody Shipping shipping)throws Exception{
+		Shipping shipping2= shippingservices.selectByPrimaryKey(shipping.getReceiverId());
+		return shipping2;
+	}
+/**
+ * 
+ * @param request
+ * @param response
+ * @param shipping
+ * @return
+ * @throws Exception
+ */
+	@RequestMapping("/deleteshipping")
+	@ResponseBody
+	public String deleteshipping(HttpServletRequest request,HttpServletResponse response,@RequestBody Shipping shipping)throws Exception{
+		shippingservices.deleteByPrimaryKey(shipping.getReceiverId());
+		return"success";
+	}
 }

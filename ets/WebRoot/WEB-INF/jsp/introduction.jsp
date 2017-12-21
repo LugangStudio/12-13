@@ -330,7 +330,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<dt class="tb-metatit">优惠券</dt>
 									<div class="gold-list">
 										<ul>
-											<li>穷鬼还想领优惠券？？呵呵！惊了</li>
+											<li>并没有优惠券！！</li>
 											
 										</ul>
 									</div>

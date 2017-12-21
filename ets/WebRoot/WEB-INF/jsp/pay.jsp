@@ -26,10 +26,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript">
 		$(function(){
-	//var xuanze=	$('#xuanze:checked').val();
-//$('#xuanze:checked').blur(function(){alert("dsa");})
-	
+		//最后提交表单用
+		var dongtaireceiverid;
 		
+	
+	
+		 $("[id =xuanze]").click(function(){
+		var selectid= this.value;
+		var obj={"receiverId":selectid};
+			$.ajax(
+			{
+				type:'POST',
+				url:'${pageContext.request.contextPath}/selectid.action',
+				contentType:'application/json;charset=utf-8',
+				data:JSON.stringify(obj),
+				dataType: 'json',
+				success:function(data){
+				dongtaireceiverid=data.receiverId;
+				$('#buyname').text(data.receiverName);
+				$('#buyphone').text(data.receiverPhone);
+				 $('#province2').text(data.receiverState);
+				$('#address2').text(data.receiverAddress);
+				$('#city2').text(data.receiverCity);
+				$('#area2').text(data.receiverDistrict);
+				}})
+		
+   });
+   
+   
+   	//开始删除地址
+	$("#[id=deleteshipping]").click(
+	function(){
+	var deleteshipid=this.title;
+	var obj={"receiverId":deleteshipid};
+	
+		$.ajax(
+			{
+				type:'POST',
+				url:'${pageContext.request.contextPath}/deleteshipping.action',
+				contentType:'application/json;charset=utf-8',
+				data:JSON.stringify(obj),
+				dataType: 'json',
+				success:function(data){
+//呵呵！跳转				
+				window.location.href = "topay.action?userId=${user.userId}&item_id=${item.itemId}&num=${num}";
+
+				}})
+	}
+	)
+	
+	
+	
+	
+	
+	
+	
 		//地址级联参考：http://blog.csdn.net/u013871100/article/details/52751384
 		var address = $("#user-intro");  
     var province = $("#province");  
@@ -146,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	dataType:'json',
    	contentType:'application/json;charset=utf-8',
    	success:function(data){
+   	window.location.href = "topay.action?userId=${user.userId}&item_id=${item.itemId}&num=${num}";
    	
    	}
    	})
@@ -192,13 +244,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var message=$("#message").val();
 			var kucun=${item.num};
 			
-			var receiverid=	$('#xuanze:checked').val();
-			
-			
-			var obj={"shippingId":receiverid,"buyerMessage":message,"payment":payment,"buyerId":buyid,"sellerId":sellid};
+			var receiverids=dongtaireceiverid;
+			var obj={"shippingId":receiverids,"buyerMessage":message,"payment":payment,"buyerId":buyid,"sellerId":sellid};
 			if(num>kucun){
 			alert("数量不能超过库存，请重新选择！！");}
-			else{
+		 	else{
 			 $.ajax({
 				 	type:'POST',
    	url:'${pageContext.request.contextPath}/insertOrder.action',
@@ -210,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	}
 			}) 
 
-			}
+			} 
 			})
 		
 		
@@ -276,7 +326,7 @@ ${user.username}					</div>
 						<ul>
 							<c:forEach items="${shippings}" var="var">
 							<div class="per-border"></div>
-							<li class="user-addresslist" >
+							<li class="user-addresslist"  id="xuanze" value="${var.receiverId}">
 								<div class="address-left">
 									<div class="user DefaultAddr">
 	<span class="buy-address-detail">   
@@ -303,12 +353,12 @@ ${user.username}					</div>
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-								<input type="checkbox" id="xuanze" value="${var.receiverId}" >选择此地址</input>
+								
 									
-									<span class="new-addr-bar">|</span>
+									
 									<a href="#">编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);"  onclick="delClick(this);">删除</a>
+								<a id="deleteshipping" title="${var.receiverId}">删除</a>
 								</div>
 
 							</li>
@@ -523,18 +573,18 @@ ${user.username}					</div>
 											<p class="buy-footer-address">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
-								   <span class="provinces">湖北</span>省
-												<span class="city">武汉</span>市
-												<span class="dist">洪山</span>区
-												<span class="street">雄楚大道666号(中南财经政法大学)</span>
+								   <span class="provinces" id="province2"></span>
+												<span class="city" id="city2"></span>
+												<span class="dist" id="area2"></span>
+												<span class="street" id="address2"></span>
 												</span>
 												</span>
 											</p>
 											<p class="buy-footer-address">
-												<span class="buy-line-title">收货人：</span>
+												<span class="buy-line-title" >收货人：</span>
 												<span class="buy-address-detail">   
-                                         <span class="buy-user">艾迪 </span>
-												<span class="buy-phone">15871145629</span>
+                                         <span class="buy-user" id="buyname"></span>
+												<span class="buy-phone"id="buyphone"></span>
 												</span>
 											</p>
 										</div>

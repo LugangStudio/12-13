@@ -16,7 +16,7 @@ private ShippingMapper shippingMapper;
 	@Override
 	public int deleteByPrimaryKey(Integer receiverId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return shippingMapper.deleteByPrimaryKey(receiverId);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ private ShippingMapper shippingMapper;
 	@Override
 	public Shipping selectByPrimaryKey(Integer receiverId) {
 		// TODO Auto-generated method stub
-		return null;
+		return shippingMapper.selectByPrimaryKey(receiverId);
 	}
 
 	@Override
