@@ -23,7 +23,8 @@ public class personindexcontroller {
 	@RequestMapping("/personindexcon")
 	public ModelAndView personindexcon(HttpServletRequest request,HttpServletResponse response,String username){	
 	ModelAndView mv=new ModelAndView();	
-	mv.addObject(username,username);
+	
+	mv.addObject("username",username);
 	mv.setViewName("personindex");
 	return mv;
 	}

@@ -22,7 +22,7 @@ public class home2controller {
 	@Autowired
 	private IUserMapperService userservices;
 	
-	@RequestMapping("hreftointroduction")
+	@RequestMapping("/hreftointroduction")
  public ModelAndView hreftointroduction(HttpServletRequest request,HttpServletResponse response,int userID,int item_id)throws Exception{
 	Item item=itemservices.selectByPrimaryKey(Long.valueOf(item_id));
 	User user=userservices.selectByPrimaryKey(Long.valueOf(userID));

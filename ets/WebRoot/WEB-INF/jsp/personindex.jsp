@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="topMessage">
 								<div class="menu-hd">
 									<a href="#" target="_top" class="h"><%=username %></a>
-									<a href="#" target="_top">免费注册</a>
+									<a href="#" target="_top"></a>
 								</div>
 							</div>
 						</ul>

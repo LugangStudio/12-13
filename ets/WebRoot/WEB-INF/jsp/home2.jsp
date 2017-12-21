@@ -1084,7 +1084,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <div class="am-g am-g-fixed sale">
 						<div class="am-u-sm-3 sale-item">
 							<div class="s-img">
-								<a href="# "><img src="images/sale3.jpg" /></a>
+								<a href="hreftointroduction.action?userID=22&item_id=1 "><img src="images/sale3.jpg" /></a>
 							</div>
                            <div class="s-info">
                            	   <a href="#"><p class="s-title">ZEK 原味海苔</p></a>

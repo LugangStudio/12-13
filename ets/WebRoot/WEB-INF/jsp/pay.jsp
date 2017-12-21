@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,6 +26,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript">
 		$(function(){
+	//var xuanze=	$('#xuanze:checked').val();
+//$('#xuanze:checked').blur(function(){alert("dsa");})
+	
+		
 		//地址级联参考：http://blog.csdn.net/u013871100/article/details/52751384
 		var address = $("#user-intro");  
     var province = $("#province");  
@@ -122,9 +127,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  //以上地址级联	
  	//下面开始新增地址AJAX
  	
- 	$("#save").click(function(){
- 	var phone=$("receiver-phone").val();
- 	var name=$("receiver-phone").val();
+  	$("#save").click(function(){
+ 	var phone=$("#receiver-phone").val();
+ 	var name=$("#receiver-phone").val();
  	var province = $("#province").find("option:selected").text();  
     var city = $("#city").find("option:selected").text(); 
     var area = $("#area").find("option:selected").text();
@@ -134,15 +139,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	var obj={"userId":userid,"receiverName":name,"receiverPhone":phone,"receiverState":province,
    	"receiverCity":city,"receiverDistrict":area,"receiverAddress":address};
    	
-   	$ajax({
+   	$.ajax({
    	type:'POST',
-   	url:'',
+   	url:'${pageContext.request.contextPath}/insertshipping.action',
    	data:JSON.stringify(obj),
-   	dataType:'json';
-   	contentType:'application/json;charset=utf-8'
+   	dataType:'json',
+   	contentType:'application/json;charset=utf-8',
+   	success:function(data){
+   	
+   	}
    	})
  	
- 	})
+ 	}) 
  	
  	
  	
@@ -177,17 +185,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			$("#holyshit269").click(
 			function(){
+			var buyid=${user.userId};
+			var sellid=${item.userId};
+			var payment=$("#heji").text();
 			var num=$("#text_box").val();
+			var message=$("#message").val();
 			var kucun=${item.num};
+			
+			var receiverid=	$('#xuanze:checked').val();
+			
+			
+			var obj={"shippingId":receiverid,"buyerMessage":message,"payment":payment,"buyerId":buyid,"sellerId":sellid};
 			if(num>kucun){
 			alert("数量不能超过库存，请重新选择！！");}
 			else{
-//			window.location.href = "topay.action?userId=${user.userId}&item_id=${item.itemId}&num="+num;
+			 $.ajax({
+				 	type:'POST',
+   	url:'${pageContext.request.contextPath}/insertOrder.action',
+   	data:JSON.stringify(obj),
+   	dataType:'json',
+   	contentType:'application/json;charset=utf-8',
+   	success:function(data){
+   	alert(data);
+   	}
+			}) 
+
 			}
 			})
-		
-		
-
 		
 		
 		})
@@ -242,68 +266,31 @@ ${user.username}					</div>
 				<!--地址 -->
 				<div class="paycont">
 					<div class="address">
-						<h3>确认收货地址 </h3>
+						<h3>
+						确认收货地址
+						</h3>
 						<div class="control">
 							<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
 						</div>
 						<div class="clear"></div>
 						<ul>
+							<c:forEach items="${shippings}" var="var">
 							<div class="per-border"></div>
-							<li class="user-addresslist defaultAddr">
-
+							<li class="user-addresslist" >
 								<div class="address-left">
 									<div class="user DefaultAddr">
-
-										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15888888888</span>
+	<span class="buy-address-detail">   
+                   <span class="buy-user" id="recn">${var.receiverName}</span>
+										<span class="buy-phone">${var.receiverPhone}</span>
 										</span>
 									</div>
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
 										<span class="buy--address-detail">
-								   <span class="provinces">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">洪山</span>区
-										<span class="street">雄楚大道666号(中南财经政法大学)</span>
-										</span>
-
-										</span>
-									</div>
-									<ins class="deftip">默认地址</ins>
-								</div>
-								<div class="address-right">
-									<a href="person/address.html">
-										<span class="am-icon-angle-right am-icon-lg"></span></a>
-								</div>
-								<div class="clear"></div>
-
-								<div class="new-addr-btn">
-									<a href="#" class="hidden">设为默认</a>
-									<span class="new-addr-bar hidden">|</span>
-									<a href="#">编辑</a>
-									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
-								</div>
-
-							</li>
-							<div class="per-border"></div>
-							<li class="user-addresslist">
-								<div class="address-left">
-									<div class="user DefaultAddr">
-
-										<span class="buy-address-detail">   
-                   <span class="buy-user">艾迪 </span>
-										<span class="buy-phone">15877777777</span>
-										</span>
-									</div>
-									<div class="default-address DefaultAddr">
-										<span class="buy-line-title buy-line-title-type">收货地址：</span>
-										<span class="buy--address-detail">
-								   <span class="provinces">湖北</span>省
-										<span class="city">武汉</span>市
-										<span class="dist">武昌</span>区
-										<span class="street">东湖路75号众环大厦9栋9层999</span>
+								   <span class="provinces">${var.receiverState}</span>
+										<span class="city">${var.receiverCity}</span>
+										<span class="dist">${var.receiverDistrict}</span>
+										<span class="street">${var.receiverAddress}</span>
 										</span>
 
 										</span>
@@ -316,7 +303,8 @@ ${user.username}					</div>
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-									<a href="#">设为默认</a>
+								<input type="checkbox" id="xuanze" value="${var.receiverId}" >选择此地址</input>
+									
 									<span class="new-addr-bar">|</span>
 									<a href="#">编辑</a>
 									<span class="new-addr-bar">|</span>
@@ -324,7 +312,8 @@ ${user.username}					</div>
 								</div>
 
 							</li>
-
+							
+</c:forEach>
 						</ul>
 
 						<div class="clear"></div>
@@ -452,7 +441,7 @@ ${user.username}					</div>
 								<div class="order-user-info">
 									<div id="holyshit257" class="memo">
 										<label>买家留言：</label>
-										<input type="text" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
+										<input id="message" type="text" title="选填,对本次交易的说明（建议填写已经和卖家达成一致的说明）" placeholder="选填,建议填写和卖家达成一致的说明" class="memo-input J_MakePoint c2c-text-default memo-close">
 										<div class="msg hidden J-msg">
 											<p class="error">最多输入500个字符</p>
 										</div>
@@ -637,7 +626,7 @@ ${user.username}					</div>
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<div class="am-btn am-btn-danger" id="save">保存</div>
+								<div class="am-btn am-btn-danger close" id="save">保存</div>
 								<div class="am-btn am-btn-danger close" >取消</div>
 							</div>
 						</div>

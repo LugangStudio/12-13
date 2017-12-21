@@ -176,4 +176,15 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where receiver_id = #{receiverId,jdbcType=INTEGER}
   </update>
+  
+  
+  <!-- 自定义方法 -->
+  <select id="selectByuserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_shipping
+    where user_id = #{value,jdbcType=BIGINT}
+  </select>
+  
+  
 </mapper>

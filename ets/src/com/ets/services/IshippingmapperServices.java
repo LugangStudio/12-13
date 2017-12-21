@@ -1,11 +1,11 @@
-package com.ets.mapper;
+package com.ets.services;
 
 import java.util.List;
 
 import com.ets.pojo.Shipping;
 
-public interface ShippingMapper {
-    int deleteByPrimaryKey(Integer receiverId);
+public interface IshippingmapperServices {
+	int deleteByPrimaryKey(Integer receiverId);
 
     int insert(Shipping record);
 
