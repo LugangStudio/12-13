@@ -45,11 +45,14 @@ public class loginController {
 		System.out.println(username+"³É¹¦µÇÂ¼£¡");
 		System.out.println("****************************");
 		List<User> users=services.getall();
+		long userId=services.getid(username);
 		User user2=new User();
 		for (User user : users) {
 			if(user.getUsername().equals(username)){user2=user;}
+			
 		}
 		ModelAndView mv=new ModelAndView();
+		mv.addObject("userId",userId);
 		mv.addObject("user", user2);
 		mv.setViewName("home2");
 		return mv;

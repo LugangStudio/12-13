@@ -1,5 +1,7 @@
 package com.ets.mapper;
 
+import java.util.List;
+
 import com.ets.pojo.Item;
 
 public interface ItemMapper {
@@ -14,4 +16,6 @@ public interface ItemMapper {
     int updateByPrimaryKeySelective(Item record);
 
     int updateByPrimaryKey(Item record);
+    List<Item> getbytitle(String title);
+    long getid(String title);
 }

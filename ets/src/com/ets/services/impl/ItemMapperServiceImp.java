@@ -1,5 +1,7 @@
 package com.ets.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,20 @@ public class ItemMapperServiceImp implements IItemmapperService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public List<Item> getbytitle(String title) {
+		// TODO Auto-generated method stub
+		return ItemMapper.getbytitle(title);
+	}
+
+	@Override
+	public long getid(String title) {
+		// TODO Auto-generated method stub
+		return ItemMapper.getid(title);
+	}
+
+
+	
 
 }

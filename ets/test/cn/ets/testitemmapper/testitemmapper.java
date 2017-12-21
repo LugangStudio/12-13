@@ -1,5 +1,8 @@
 package cn.ets.testitemmapper;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -17,8 +20,11 @@ public class testitemmapper {
 	@Test
 	public void testgetall(){
 		ItemMapper ip=(ItemMapper) context.getBean("itemMapper");
-		Item i=ip.selectByPrimaryKey(1l);
-		System.out.println(i.getSellPoint());
+		List<Item> i=ip.getbytitle("");
+for (Iterator iterator = i.iterator(); iterator.hasNext();) {
+	Item item = (Item) iterator.next();
+	System.out.println(item.getTitle());
+}
 	}
 	
 }

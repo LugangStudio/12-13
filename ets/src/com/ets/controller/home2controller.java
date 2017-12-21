@@ -1,5 +1,7 @@
 package com.ets.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,4 +34,15 @@ public class home2controller {
 	mv.setViewName("introduction");
 	 return mv; 
  }
+	@RequestMapping("/tosearch")
+	public ModelAndView tosearch(HttpServletRequest request,HttpServletResponse response,int userID,String item_title){
+		ModelAndView mv=new ModelAndView();
+		User user=userservices.selectByPrimaryKey(Long.valueOf(userID));
+		List<Item> items=itemservices.getbytitle(item_title);
+		mv.addObject("items", items);
+		mv.addObject("user",user);
+		mv.setViewName("search");
+		return mv;
+	}
+	
 }

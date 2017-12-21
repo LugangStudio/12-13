@@ -24,8 +24,10 @@ public class test {
 	@Test
 	public void testservices(){
 		IItemmapperService iu=(IItemmapperService)context.getBean("itemService");
-		Item u=iu.selectByPrimaryKey(1l);
-		System.out.println(u.getSellPoint());
+		List<Item> u=iu.getbytitle("果子");
+		for (Item item : u) {
+			System.out.println(item.getItemId());
+		}
 	}
 	@Test
 	public void testshiping(){
@@ -34,5 +36,12 @@ public class test {
 		for (Shipping shipping : ships) {
 			System.out.println(shipping.getReceiverAddress());
 		}
+	}
+	@Test
+	public void testservicess(){
+		
+		IItemmapperService iu=(IItemmapperService)context.getBean("itemService");
+		long id=iu.getid("煎饼果子");
+			System.out.println(id);
 	}
 }

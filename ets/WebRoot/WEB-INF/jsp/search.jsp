@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"  language="java" import="java.util.*"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
@@ -17,7 +17,40 @@
 
 		<script type="text/javascript" src="basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+		
+			<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+		<script type="text/javascript">
+		$(function(){
+		$("#[id=dianji]").click(
+		function(){
+		var title=this.title;
+		var userId=${user.userId};
+		
+		
+			$.ajax(
+			{
+				type:'POST',
+				url:'${pageContext.request.contextPath}/selectid.action',
+				contentType:'application/json;charset=utf-8',
+				data:JSON.stringify(obj),
+				dataType: 'json',
+				success:function(data){
+				dongtaireceiverid=data.receiverId;
+				$('#buyname').text(data.receiverName);
+				$('#buyphone').text(data.receiverPhone);
+				 $('#province2').text(data.receiverState);
+				$('#address2').text(data.receiverAddress);
+				$('#city2').text(data.receiverCity);
+				$('#area2').text(data.receiverDistrict);
+				}})
+		}
+		)
+		})
+		</script>
+		
+		
 	</head>
+	
 
 	<body>
 
@@ -26,8 +59,8 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="#" target="_top" class="h">亲，请登录</a>
-						<a href="#" target="_top">免费注册</a>
+						<a href="#" target="_top" class="h">${user.username }</a>
+						<a href="#" target="_top"></a>
 					</div>
 				</div>
 			</ul>
@@ -163,173 +196,23 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-									<li>
-										<div class="i-pic limit">
-											<img src="images/imgsearch1.jpg" />											
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
+									<c:forEach items="${items}" var="item">
+									<li id="dianji" title="${item.title}">
 										<div class="i-pic limit">
 											
 											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
+											<p class="title fl">${item.title}</p>
 											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
+												<b>￥</b>
+												<strong>${item.price }</strong>
 											</p>
 											<p class="number fl">
 												销量<span>1110</span>
 											</p>
 										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="i-pic limit">
-											
-											<img src="images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
+									</li> 
+									
+									</c:forEach>
 								</ul>
 							</div>
 							<div class="search-side">
