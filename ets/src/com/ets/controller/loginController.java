@@ -52,6 +52,7 @@ public class loginController {
 			
 		}
 		ModelAndView mv=new ModelAndView();
+		System.out.println(user2.getUsername());
 		mv.addObject("userId",userId);
 		mv.addObject("user", user2);
 		mv.setViewName("home2");

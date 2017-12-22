@@ -23,26 +23,11 @@
 		$(function(){
 		$("#[id=dianji]").click(
 		function(){
-		var title=this.title;
+		var itemId=this.title;
 		var userId=${user.userId};
-		
-		
-			$.ajax(
-			{
-				type:'POST',
-				url:'${pageContext.request.contextPath}/selectid.action',
-				contentType:'application/json;charset=utf-8',
-				data:JSON.stringify(obj),
-				dataType: 'json',
-				success:function(data){
-				dongtaireceiverid=data.receiverId;
-				$('#buyname').text(data.receiverName);
-				$('#buyphone').text(data.receiverPhone);
-				 $('#province2').text(data.receiverState);
-				$('#address2').text(data.receiverAddress);
-				$('#city2').text(data.receiverCity);
-				$('#area2').text(data.receiverDistrict);
-				}})
+		//http://localhost:8080/ets/hreftointroduction.action?userID=22&item_id=1
+		window.location.href="hreftointroduction.action?userID="+userId+"&item_id="+itemId;
+	
 		}
 		)
 		})
@@ -197,7 +182,7 @@
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
 									<c:forEach items="${items}" var="item">
-									<li id="dianji" title="${item.title}">
+									<li id="dianji" title="${item.itemId}">
 										<div class="i-pic limit">
 											
 											<img src="images/imgsearch1.jpg" />

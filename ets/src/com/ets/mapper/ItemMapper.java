@@ -18,4 +18,5 @@ public interface ItemMapper {
     int updateByPrimaryKey(Item record);
     List<Item> getbytitle(String title);
     long getid(String title);
+    List<Item> getall();
 }

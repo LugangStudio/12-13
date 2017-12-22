@@ -179,10 +179,18 @@
   
   
   <!--搜索用  -->
-  <select id="getbytitle" resultType="com.ets.pojo.Item" parameterType="java.lang.String">
-  select * from tb_item where title like '%${value}%'
+  <select id="getbytitle" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select 
+<include refid="Base_Column_List" />
+ from tb_item where title like '%${value}%'
   </select>
   <select id="getid" resultType="long" parameterType="java.lang.String">
   select item_id from tb_item where title=#{value}
+  </select>
+  
+  <select id="getall" resultMap="BaseResultMap">
+  select 
+<include refid="Base_Column_List" />
+ from tb_item
   </select>
 </mapper>

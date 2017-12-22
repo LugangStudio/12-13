@@ -27,4 +27,17 @@ for (Iterator iterator = i.iterator(); iterator.hasNext();) {
 }
 	}
 	
+	
+	@Test
+	public void testgetalls(){
+		ItemMapper ip=(ItemMapper) context.getBean("itemMapper");
+//		Item i=ip.selectByPrimaryKey(1l);
+//		System.out.println(i.getTitle()+i.getItemId());
+		List<Item> i=ip.getall();
+for (Iterator iterator = i.iterator(); iterator.hasNext();) {
+	Item item = (Item) iterator.next();
+	System.out.println(item.getItemId());
+}
+	}
+	
 }
